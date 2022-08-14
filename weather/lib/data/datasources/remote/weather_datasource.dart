@@ -9,9 +9,8 @@ abstract class WeatherDatasource {
 class WeatherDataApi extends WeatherDatasource {
   @override
   Future<WeatherModel> listWeather(double lat, double longi) async {
-    Dio dio = new Dio();
+    Dio dio = Dio();
     var url = baseApi + 'lat=$lat&lon=$longi&appid=$apiKey';
-    print("Url : $url");
     Response response = await dio.get(url);
     return WeatherModel.fromJson(response.data as Map<String, dynamic>);
   }

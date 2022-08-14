@@ -1,17 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:weather/data/datasources/remote/weather_datasource.dart';
-import 'package:weather/data/repositories/weather_repository_impl.dart';
 import 'package:weather/domain/entities/weather_entity.dart';
+import 'package:weather/domain/repositories/weather_repository.dart';
 
 abstract class WeatherUsecase {
   Future<List<WeatherEntity>> listWeather(double lat, double lon);
 }
 
 class WeatherUsecaseImpl extends WeatherUsecase {
-  WeatherDataApi dataApi = WeatherDataApi();
-  WeatherUsecaseImpl({@required dataApi});
+  final WeatherRepository repository;
+  WeatherUsecaseImpl({required this.repository});
 
   @override
   Future<List<WeatherEntity>> listWeather(double lat, double lon) =>
-      WeatherRepositoryImpl(dataApi).listWeather(lat, lon);
+      repository.listWeather(lat, lon);
 }

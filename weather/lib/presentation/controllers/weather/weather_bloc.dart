@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
-import 'package:weather/data/datasources/remote/weather_datasource.dart';
 import 'package:weather/domain/entities/weather_entity.dart';
 import 'package:weather/domain/usecases/weather_usecase.dart';
 
@@ -8,11 +8,16 @@ part 'weather_event.dart';
 part 'weather_state.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
-  WeatherBloc() : super(WeatherInitial()) {
+  WeatherUsecase weatherUsecase;
+  WeatherBloc({required this.weatherUsecase}) : super(WeatherInitial()) {
     on<LoadWeatherEvent>((event, emit) async {
-      var repository = WeatherUsecaseImpl(dataApi: WeatherDataApi());
-      var listData = await repository.listWeather(event.lat!, event.lon!);
-      emit(WeatherSuccess(listEntity: listData));
+      emit(WaitingLoading());
+      try {
+        var listData = await weatherUsecase.listWeather(event.lat!, event.lon!);
+        emit(WeatherSuccess(listEntity: listData));
+      } on DioError catch (error) {
+        emit(WeatherError(messageError: error.message));
+      }
     });
   }
 }
