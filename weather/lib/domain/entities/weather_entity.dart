@@ -6,6 +6,8 @@ class WeatherEntity {
   num? tempMin;
   num? tempMax;
   String? iconWeather;
+  num? acceleratorWind;
+  num? directionWind;
   WeatherEntity(
       {this.dateTimeWeather,
       this.titleWeather,
@@ -13,5 +15,7 @@ class WeatherEntity {
       this.temp,
       this.tempMax,
       this.tempMin,
-      this.iconWeather});
+      this.iconWeather,
+      this.acceleratorWind,
+      this.directionWind});
 }

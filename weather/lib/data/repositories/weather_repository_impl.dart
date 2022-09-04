@@ -20,6 +20,8 @@ class WeatherRepositoryImpl extends WeatherRepository {
       weatherEntity.titleWeather = items.weather![0].main!;
       weatherEntity.descWeather = items.weather![0].description!;
       weatherEntity.iconWeather = urlIcon(items.weather![0].icon);
+      weatherEntity.acceleratorWind = items.wind!.speed;
+      weatherEntity.directionWind = items.wind!.deg;
       result.add(weatherEntity);
     }
     return result;

@@ -96,6 +96,43 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Speed Wind',
+                      style: textMediumColor(boldCondition: false),
+                    ),
+                    Text(
+                      '${widget.weatherEntity!.acceleratorWind}',
+                      style: textMediumColor(boldCondition: true),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Direction Wind',
+                      style: textMediumColor(boldCondition: false),
+                    ),
+                    Text(
+                      '${widget.weatherEntity!.directionWind}',
+                      style: textMediumColor(boldCondition: true),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
       ),
